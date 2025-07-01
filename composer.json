@@ -5,7 +5,7 @@
     "type": "library",
     "autoload": {
         "psr-4": {
-            "Leama\\SitemapGenerator\\": "src/"
+            "App\\": "src/"
         }
     },
     "authors": [
@@ -14,5 +14,9 @@
             "email": "leaman00@mail.ru"
         }
     ],
-    "require": {}
+    "require": {
+        "php": ">=8.2",
+        "ext-simplexml": "*",
+        "ext-dom": "*"
+    }
 }
