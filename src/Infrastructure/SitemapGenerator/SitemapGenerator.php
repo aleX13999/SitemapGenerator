@@ -6,6 +6,7 @@ use App\Application\SitemapGeneration\Exception\DataException;
 use App\Application\SitemapGeneration\Exception\DirectoryException;
 use App\Application\SitemapGeneration\Exception\FormatException;
 use App\Application\SitemapGeneration\Exception\ValidationException;
+use App\Application\SitemapGeneration\Model\SitemapGenerationFormat;
 use App\Application\SitemapGeneration\SitemapGenerationServiceInterface;
 use App\Application\SitemapGeneration\Validator\SitemapGenerationValidator;
 use App\Infrastructure\SitemapGenerator\Csv\CsvSitemapGenerator;
@@ -19,9 +20,9 @@ class SitemapGenerator
 
     /** @var array<string, class-string<SitemapGenerationServiceInterface>> */
     private array $formatMap = [
-        'json' => JsonSitemapGenerator::class,
-        'csv' => CsvSitemapGenerator::class,
-        'xml' => XmlSitemapGenerator::class,
+        SitemapGenerationFormat::JSON => JsonSitemapGenerator::class,
+        SitemapGenerationFormat::CSV => CsvSitemapGenerator::class,
+        SitemapGenerationFormat::XML => XmlSitemapGenerator::class,
     ];
 
     /**
