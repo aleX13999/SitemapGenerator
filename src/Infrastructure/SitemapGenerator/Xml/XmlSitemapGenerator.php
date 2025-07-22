@@ -2,7 +2,6 @@
 
 namespace App\Infrastructure\SitemapGenerator\Xml;
 
-use App\Application\SitemapGeneration\Exception\DirectoryException;
 use App\Application\SitemapGeneration\SitemapGenerationServiceAbstract;
 use App\Infrastructure\SitemapGenerator\Exception\SitemapException;
 use DOMDocument;
@@ -11,13 +10,10 @@ use SimpleXMLElement;
 class XmlSitemapGenerator extends SitemapGenerationServiceAbstract
 {
     /**
-     * @throws DirectoryException
      * @throws SitemapException
      */
     public function generate(array $pages, string $generatePath): void
     {
-        $this->ensureDirectoryExists($generatePath);
-
         try {
             $xml = new SimpleXMLElement(
                 '<?xml version="1.0" encoding="UTF-8"?>

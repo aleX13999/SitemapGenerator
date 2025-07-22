@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Application\SitemapGeneration\Exception;
+namespace App\Application\Directory\Exception;
 
 class DirectoryException extends \Exception
 {

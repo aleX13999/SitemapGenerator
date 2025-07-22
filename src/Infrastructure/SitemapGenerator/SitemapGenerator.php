@@ -2,8 +2,9 @@
 
 namespace App\Infrastructure\SitemapGenerator;
 
+use App\Application\Directory\DirectoryManager;
+use App\Application\Directory\Exception\DirectoryException;
 use App\Application\SitemapGeneration\Exception\DataException;
-use App\Application\SitemapGeneration\Exception\DirectoryException;
 use App\Application\SitemapGeneration\Exception\FormatException;
 use App\Application\SitemapGeneration\Exception\ValidationException;
 use App\Application\SitemapGeneration\Model\SitemapGenerationFormat;
@@ -37,13 +38,13 @@ class SitemapGenerator
             throw new FormatException("Wrong generate file format: " . $this->format);
         }
 
-        $arr = explode('.', $this->fullFilePath);
-        if (strtolower(end($arr)) !== strtolower($this->format)) {
+        $fileNameParts = explode('.', $this->fullFilePath);
+        if (strtolower(end($fileNameParts)) !== strtolower($this->format)) {
             throw new FormatException("The file format does not match the generation format");
         }
 
         $generatorClass = $this->formatMap[$this->format];
-        $this->generator = new $generatorClass();
+        $this->generator = new $generatorClass(new DirectoryManager());
     }
 
     /**
@@ -54,6 +55,7 @@ class SitemapGenerator
         try {
             SitemapGenerationValidator::validatePages($this->pages);
 
+            $this->generator->prepareOutputPath($this->fullFilePath);
             $this->generator->generate($this->pages, $this->fullFilePath);
 
         } catch (ValidationException|DataException|DirectoryException $e) {
