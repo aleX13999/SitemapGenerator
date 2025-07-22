@@ -1,7 +1,7 @@
 {
     "name": "leama/sitemap-generator",
     "description": "Generate site map file by array of pages and extension",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "type": "library",
     "autoload": {
         "psr-4": {
